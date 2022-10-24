@@ -93,7 +93,7 @@ RegisterNetEvent('police:client:SearchPlayer', function()
         TriggerServerEvent("inventory:server:OpenInventory", "otherplayer", playerId)
         TriggerServerEvent("police:server:SearchPlayer", playerId)
     else
-        QBCore.Functions.Notify(Lang:t("error.none_nearby"), "error")
+        exports['SS-Notify']:Alert("Pinehill", "Ingen i närheten", 5000, 'error')
     end
 end)
 
@@ -103,7 +103,7 @@ RegisterNetEvent('police:client:SeizeCash', function()
         local playerId = GetPlayerServerId(player)
         TriggerServerEvent("police:server:SeizeCash", playerId)
     else
-        QBCore.Functions.Notify(Lang:t("error.none_nearby"), "error")
+        exports['SS-Notify']:Alert("Pinehill", "Ingen i närheten", 5000, 'error')
     end
 end)
 
@@ -113,7 +113,7 @@ RegisterNetEvent('police:client:SeizeDriverLicense', function()
         local playerId = GetPlayerServerId(player)
         TriggerServerEvent("police:server:SeizeDriverLicense", playerId)
     else
-        QBCore.Functions.Notify(Lang:t("error.none_nearby"), "error")
+        exports['SS-Notify']:Alert("Pinehill", "Ingen i närheten", 5000, 'error')
     end
 end)
 
@@ -142,15 +142,15 @@ RegisterNetEvent('police:client:RobPlayer', function()
                     TriggerServerEvent("inventory:server:OpenInventory", "otherplayer", playerId)
                     TriggerEvent("inventory:server:RobPlayer", playerId)
                 else
-                    QBCore.Functions.Notify(Lang:t("error.none_nearby"), "error")
+                    exports['SS-Notify']:Alert("Pinehill", "Ingen i närheten", 5000, 'error')
                 end
             end, function() -- Cancel
                 StopAnimTask(ped, "random@shop_robbery", "robbery_action_b", 1.0)
-                QBCore.Functions.Notify(Lang:t("error.canceled"), "error")
+                exports['SS-Notify']:Alert("Pinehill", "Avbrött", 5000, 'error')
             end)
         end
     else
-        QBCore.Functions.Notify(Lang:t("error.none_nearby"), "error")
+        exports['SS-Notify']:Alert("Pinehill", "Ingen i närheten", 5000, 'error')
     end
 end)
 
@@ -173,10 +173,10 @@ RegisterNetEvent('police:client:JailPlayer', function()
         if tonumber(dialog['jailtime']) > 0 then
             TriggerServerEvent("police:server:JailPlayer", playerId, tonumber(dialog['jailtime']))
         else
-            QBCore.Functions.Notify(Lang:t("error.time_higher"), "error")
+            exports['SS-Notify']:Alert("Pinehill", "Tiden måste vara högre en 0", 5000, 'error')
         end
     else
-        QBCore.Functions.Notify(Lang:t("error.none_nearby"), "error")
+        exports['SS-Notify']:Alert("Pinehill", "Ingen i närheten", 5000, 'error')
     end
 end)
 
@@ -199,10 +199,10 @@ RegisterNetEvent('police:client:BillPlayer', function()
         if tonumber(dialog['bill']) > 0 then
             TriggerServerEvent("police:server:BillPlayer", playerId, tonumber(dialog['bill']))
         else
-            QBCore.Functions.Notify(Lang:t("error.amount_higher"), "error")
+            exports['SS-Notify']:Alert("Pinehill", "Bötern måste vara över 0", 5000, 'error')
         end
     else
-        QBCore.Functions.Notify(Lang:t("error.none_nearby"), "error")
+        exports['SS-Notify']:Alert("Pinehill", "Ingen i närheten", 5000, 'error')
     end
 end)
 
@@ -214,7 +214,7 @@ RegisterNetEvent('police:client:PutPlayerInVehicle', function()
             TriggerServerEvent("police:server:PutPlayerInVehicle", playerId)
         end
     else
-        QBCore.Functions.Notify(Lang:t("error.none_nearby"), "error")
+        exports['SS-Notify']:Alert("Pinehill", "Ingen i närheten", 5000, 'error')
     end
 end)
 
@@ -226,7 +226,7 @@ RegisterNetEvent('police:client:SetPlayerOutVehicle', function()
             TriggerServerEvent("police:server:SetPlayerOutVehicle", playerId)
         end
     else
-        QBCore.Functions.Notify(Lang:t("error.none_nearby"), "error")
+        exports['SS-Notify']:Alert("Pinehill", "Ingen i närheten", 5000, 'error')
     end
 end)
 
@@ -238,7 +238,7 @@ RegisterNetEvent('police:client:EscortPlayer', function()
             TriggerServerEvent("police:server:EscortPlayer", playerId)
         end
     else
-        QBCore.Functions.Notify(Lang:t("error.none_nearby"), "error")
+        exports['SS-Notify']:Alert("Pinehill", "Ingen i närheten", 5000, 'error')
     end
 end)
 
@@ -252,7 +252,7 @@ RegisterNetEvent('police:client:KidnapPlayer', function()
             end
         end
     else
-        QBCore.Functions.Notify(Lang:t("error.none_nearby"), "error")
+        exports['SS-Notify']:Alert("Pinehill", "Ingen i närheten", 5000, 'error')
     end
 end)
 
@@ -265,10 +265,10 @@ RegisterNetEvent('police:client:CuffPlayerSoft', function()
                 TriggerServerEvent("police:server:CuffPlayer", playerId, true)
                 HandCuffAnimation()
             else
-                QBCore.Functions.Notify(Lang:t("error.vehicle_cuff"), "error")
+                exports['SS-Notify']:Alert("Pinehill", "Du kan inte handfängsla någon i en bil.", 5000, 'error')
             end
         else
-            QBCore.Functions.Notify(Lang:t("error.none_nearby"), "error")
+            exports['SS-Notify']:Alert("Pinehill", "Ingen i närheten", 5000, 'error')
         end
     else
         Wait(2000)
@@ -286,14 +286,14 @@ RegisterNetEvent('police:client:CuffPlayer', function()
                         TriggerServerEvent("police:server:CuffPlayer", playerId, false)
                         HandCuffAnimation()
                     else
-                        QBCore.Functions.Notify(Lang:t("error.vehicle_cuff"), "error")
+                        exports['SS-Notify']:Alert("Pinehill", "Du kan inte handfängsla någon i en bil.", 5000, 'error')
                     end
                 else
-                    QBCore.Functions.Notify(Lang:t("error.no_cuff"), "error")
+                    exports['SS-Notify']:Alert("Pinehill", "Du har inga handfängsel", 5000, 'error')
                 end
             end, Config.HandCuffItem)
         else
-            QBCore.Functions.Notify(Lang:t("error.none_nearby"), "error")
+            exports['SS-Notify']:Alert("Pinehill", "Ingen i närheten", 5000, 'error')
         end
     else
         Wait(2000)
